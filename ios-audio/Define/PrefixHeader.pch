@@ -1,0 +1,20 @@
+//
+//  PrefixHeader.pch
+//  ios-audio
+//
+//  Created by mac on 2020/9/19.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#pragma mark - Masonry
+
+#define MAS_SHORTHAND_GLOBALS
+#define MAS_SHORTHAND
+#import "Masonry.h"
+
+#define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
+#define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
+
+#endif /* PrefixHeader_pch */

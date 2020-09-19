@@ -1,0 +1,6 @@
+framework module Pods_ios_audio {
+  umbrella header "Pods-ios-audio-umbrella.h"
+
+  export *
+  module * { export * }
+}
