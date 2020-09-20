@@ -12,6 +12,8 @@
 		0493AF8225163D610040C559 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0493AF8125163D610040C559 /* Assets.xcassets */; };
 		0493AF8525163D610040C559 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0493AF8325163D610040C559 /* LaunchScreen.storyboard */; };
 		0493AF8825163D610040C559 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493AF8725163D610040C559 /* main.m */; };
+		0493AFA1251645700040C559 /* AQSPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493AFA0251645700040C559 /* AQSPlayViewController.m */; };
+		0493AFA52517374B0040C559 /* 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0493AFA42517374B0040C559 /* 1.mp3 */; };
 		2F70DCE84CBBDCD02BCD434E /* Pods_ios_audio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEFF8E3A8A28CA8B30E201A /* Pods_ios_audio.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +28,9 @@
 		0493AF8625163D610040C559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0493AF8725163D610040C559 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0493AF9C251640880040C559 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		0493AF9F251645700040C559 /* AQSPlayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AQSPlayViewController.h; sourceTree = "<group>"; };
+		0493AFA0251645700040C559 /* AQSPlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AQSPlayViewController.m; sourceTree = "<group>"; };
+		0493AFA42517374B0040C559 /* 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1.mp3; sourceTree = "<group>"; };
 		6DEFF8E3A8A28CA8B30E201A /* Pods_ios_audio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_audio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B583B55ECF23605D8F0726E /* Pods-ios-audio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-audio.debug.xcconfig"; path = "Target Support Files/Pods-ios-audio/Pods-ios-audio.debug.xcconfig"; sourceTree = "<group>"; };
 		A887A6FB7F2DF797D284DB7B /* Pods-ios-audio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-audio.release.xcconfig"; path = "Target Support Files/Pods-ios-audio/Pods-ios-audio.release.xcconfig"; sourceTree = "<group>"; };
@@ -64,6 +69,7 @@
 		0493AF7425163D5E0040C559 /* ios-audio */ = {
 			isa = PBXGroup;
 			children = (
+				0493AFA3251737350040C559 /* Resources */,
 				0493AF9B2516404A0040C559 /* Define */,
 				0493AF9925163FB70040C559 /* Model */,
 				0493AF9825163FA80040C559 /* SupportFiles */,
@@ -87,6 +93,7 @@
 		0493AF9925163FB70040C559 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0493AF9E2516452C0040C559 /* AQS-Play */,
 				0493AF7B25163D5F0040C559 /* ViewController.h */,
 				0493AF7C25163D5F0040C559 /* ViewController.m */,
 			);
@@ -99,6 +106,23 @@
 				0493AF9C251640880040C559 /* PrefixHeader.pch */,
 			);
 			path = Define;
+			sourceTree = "<group>";
+		};
+		0493AF9E2516452C0040C559 /* AQS-Play */ = {
+			isa = PBXGroup;
+			children = (
+				0493AF9F251645700040C559 /* AQSPlayViewController.h */,
+				0493AFA0251645700040C559 /* AQSPlayViewController.m */,
+			);
+			path = "AQS-Play";
+			sourceTree = "<group>";
+		};
+		0493AFA3251737350040C559 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0493AFA42517374B0040C559 /* 1.mp3 */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		C6904B3607817B04A9640B9B /* Pods */ = {
@@ -176,6 +200,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0493AFA52517374B0040C559 /* 1.mp3 in Resources */,
 				0493AF8525163D610040C559 /* LaunchScreen.storyboard in Resources */,
 				0493AF8225163D610040C559 /* Assets.xcassets in Resources */,
 			);
@@ -230,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0493AFA1251645700040C559 /* AQSPlayViewController.m in Sources */,
 				0493AF7D25163D5F0040C559 /* ViewController.m in Sources */,
 				0493AF7725163D5E0040C559 /* AppDelegate.m in Sources */,
 				0493AF8825163D610040C559 /* main.m in Sources */,
