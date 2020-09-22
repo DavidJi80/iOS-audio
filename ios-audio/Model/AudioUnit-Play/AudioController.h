@@ -11,6 +11,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AudioController : NSObject
 
+//开启 Audio Unit
+- (void)start;
+
+//关闭 Audio Unit
+- (void)stop;
+
+//结束 Audio Unit
+- (void)finished;
+
 @end
 
 NS_ASSUME_NONNULL_END

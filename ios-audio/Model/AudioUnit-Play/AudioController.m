@@ -8,7 +8,7 @@
 #import "AudioController.h"
 #import <AVFoundation/AVFoundation.h>
 
-static void checkStatus(OSStatus status);
+//static void checkStatus(OSStatus status);
 
 @interface AudioController() {
     AudioStreamBasicDescription audioFormat;
@@ -36,6 +36,7 @@ static void checkStatus(OSStatus status);
 // Bus 0 is used for the output side, bus 1 is used to get audio input.
 
 - (id)init {
+    
     OSStatus status;
     AudioComponentInstance audioUnit;
     
@@ -106,17 +107,67 @@ static void checkStatus(OSStatus status);
                                   sizeof(audioFormat));
     checkStatus(status);
     
+    
     // Set input callback
     // 设置数据采集回调函数
     AURenderCallbackStruct callbackStruct;
     callbackStruct.inputProc = recordingCallback;
     callbackStruct.inputProcRefCon = (__bridge void * _Nullable)(self);
+    status = AudioUnitSetProperty(audioUnit,
+                                  kAudioOutputUnitProperty_SetInputCallback,
+                                  kAudioUnitScope_Global,
+                                  kInputBus,
+                                  &callbackStruct,
+                                  sizeof(callbackStruct));
+    checkStatus(status);
+    
+    // Set output callback
+    // 设置声音输出回调函数。当speaker需要数据时就会调用回调函数去获取数据。它是 "拉" 数据的概念。
+    callbackStruct.inputProc = playbackCallback;
+    callbackStruct.inputProcRefCon = (__bridge void * _Nullable)(self);
+    status = AudioUnitSetProperty(audioUnit,
+                                  kAudioUnitProperty_SetRenderCallback,
+                                  kAudioUnitScope_Global,
+                                  kOutputBus,
+                                  &callbackStruct,
+                                  sizeof(callbackStruct));
+    checkStatus(status);
+    
+    // Disable buffer allocation for the recorder (optional - do this if we want to pass in our own)
+    // 关闭为录制分配的缓冲区（我们想使用我们自己分配的）
+    flag = 0;
+    status = AudioUnitSetProperty(audioUnit,
+                                  kAudioUnitProperty_ShouldAllocateBuffer,
+                                  kAudioUnitScope_Output,
+                                  kInputBus,
+                                  &flag,
+                                  sizeof(flag));
+    
+    //Allocate our own buffers if we want
+    
+    // Initialise
+    // 初始化
+    status = AudioUnitInitialize(audioUnit);
+    checkStatus(status);
+//    //Initialise也可以用以下代码
+//    UInt32 category = kAudioSessionCategory_PlayAndRecord;
+//    status = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
+//    checkStatus(status);
+//    status = 0;
+//    status = AudioSessionSetActive(YES);
+//    checkStatus(status);
+//    status = AudioUnitInitialize(_rioUnit);
+//    checkStatus(status);
+    
+    _rioUnit=audioUnit;
     
     return self;
 }
 
-static void checkStatus(OSStatus status){
-    
+// 检测状态
+void checkStatus(OSStatus status) {
+    if(status!=0)
+        printf("Error: %d\n", (int)status);
 }
 
 static OSStatus recordingCallback(void *inRefCon,
@@ -125,7 +176,35 @@ static OSStatus recordingCallback(void *inRefCon,
                                   UInt32 inBusNumber,
                                   UInt32 inNumberFrames,
                                   AudioBufferList *ioData) {
+    NSLog(@"sss");
     return noErr;
+}
+
+static OSStatus playbackCallback(void *inRefCon,
+                                 AudioUnitRenderActionFlags *ioActionFlags,
+                                 const AudioTimeStamp *inTimeStamp,
+                                 UInt32 inBusNumber,
+                                 UInt32 inNumberFrames,
+                                 AudioBufferList *ioData) {
+    NSLog(@"ddd");
+    return noErr;
+}
+
+//开启 Audio Unit
+- (void)start {
+    OSStatus status = AudioOutputUnitStart(_rioUnit);
+    checkStatus(status);
+}
+
+//关闭 Audio Unit
+- (void)stop {
+    OSStatus status = AudioOutputUnitStop(_rioUnit);
+    checkStatus(status);
+}
+
+//结束 Audio Unit
+- (void)finished {
+    AudioComponentInstanceDispose(_rioUnit);
 }
 
 @end

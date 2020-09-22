@@ -81,10 +81,10 @@
 		0493AF7425163D5E0040C559 /* ios-audio */ = {
 			isa = PBXGroup;
 			children = (
+				0493AF9825163FA80040C559 /* SupportFiles */,
 				0493AFA3251737350040C559 /* Resources */,
 				0493AF9B2516404A0040C559 /* Define */,
 				0493AF9925163FB70040C559 /* Model */,
-				0493AF9825163FA80040C559 /* SupportFiles */,
 			);
 			path = "ios-audio";
 			sourceTree = "<group>";
