@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043FC6172519EBA8008235D7 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043FC6162519EBA8008235D7 /* AudioController.m */; };
 		0493AF7725163D5E0040C559 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493AF7625163D5E0040C559 /* AppDelegate.m */; };
 		0493AF7D25163D5F0040C559 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493AF7C25163D5F0040C559 /* ViewController.m */; };
 		0493AF8225163D610040C559 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0493AF8125163D610040C559 /* Assets.xcassets */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		043FC6152519EBA8008235D7 /* AudioController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
+		043FC6162519EBA8008235D7 /* AudioController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioController.m; sourceTree = "<group>"; };
 		0493AF7225163D5E0040C559 /* ios-audio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-audio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0493AF7525163D5E0040C559 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0493AF7625163D5E0040C559 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -48,6 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		043FC6142519EB37008235D7 /* AudioUnit-Play */ = {
+			isa = PBXGroup;
+			children = (
+				043FC6152519EBA8008235D7 /* AudioController.h */,
+				043FC6162519EBA8008235D7 /* AudioController.m */,
+			);
+			path = "AudioUnit-Play";
+			sourceTree = "<group>";
+		};
 		0493AF6925163D5E0040C559 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +105,7 @@
 		0493AF9925163FB70040C559 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				043FC6142519EB37008235D7 /* AudioUnit-Play */,
 				0493AF9E2516452C0040C559 /* AQS-Play */,
 				0493AF7B25163D5F0040C559 /* ViewController.h */,
 				0493AF7C25163D5F0040C559 /* ViewController.m */,
@@ -255,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				043FC6172519EBA8008235D7 /* AudioController.m in Sources */,
 				0493AFA1251645700040C559 /* AQSPlayViewController.m in Sources */,
 				0493AF7D25163D5F0040C559 /* ViewController.m in Sources */,
 				0493AF7725163D5E0040C559 /* AppDelegate.m in Sources */,

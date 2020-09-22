@@ -209,6 +209,8 @@ void DeriveBufferSize (
     
     //8.
     aqData.mCurrentPacket = 0;                                // 1
+    
+    aqData.mIsRunning = true;                          // 1
      
     for (int i = 0; i < kNumberBuffers; ++i) {                // 2
         AudioQueueAllocateBuffer (                            // 3
@@ -241,19 +243,19 @@ void DeriveBufferSize (
         NULL                                           // 4
     );
      
-//    do {                                               // 5
-//        CFRunLoopRunInMode (                           // 6
-//            kCFRunLoopDefaultMode,                     // 7
-//            0.25,                                      // 8
-//            false                                      // 9
-//        );
-//    } while (aqData.mIsRunning);
-//
-//    CFRunLoopRunInMode (                               // 10
-//        kCFRunLoopDefaultMode,
-//        1,
-//        false
-//    );
+    do {                                               // 5
+        CFRunLoopRunInMode (                           // 6
+            kCFRunLoopDefaultMode,                     // 7
+            0.25,                                      // 8
+            false                                      // 9
+        );
+    } while (aqData.mIsRunning);
+
+    CFRunLoopRunInMode (                               // 10
+        kCFRunLoopDefaultMode,
+        1,
+        false
+    );
 }
 
 @end
