@@ -108,11 +108,13 @@ void DeriveBufferSizeAndNumPacketsToRead (
     );
 
     //5.
-    void * __nullable inUserData=(void * __nullable)CFBridgingRetain(self);
+    //将OC对象的所有权（ownership）桥接给CF对象
+    //void * inUserData=(void *)CFBridgingRetain(self);
+    void * inUserData=(__bridge_retained void *)(self);
     AudioQueueNewOutput (                                // 1
         &mDataFormat,                                    // 2
         HandleOutputBuffer,                              // 3
-        inUserData,                          // 4
+        inUserData,                                      // 4
 //        nil,                                             // 5
 //        nil,                                             // 6
         CFRunLoopGetCurrent (),                          // 5
@@ -197,7 +199,7 @@ void DeriveBufferSizeAndNumPacketsToRead (
         );
      
         HandleOutputBuffer (                                // 7
-            (__bridge void *)(self),                        // 8
+            (__bridge_retained void *)(self),               // 8
             mQueue,                                         // 9
             mBuffers[i]                                     // 10
         );
