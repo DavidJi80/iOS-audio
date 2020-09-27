@@ -18,6 +18,7 @@
 		0493AFB6251CDD050040C559 /* AQSAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493AFB5251CDD050040C559 /* AQSAudioPlayer.m */; };
 		0493AFBD251E268B0040C559 /* AudioUnitPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493AFBC251E268B0040C559 /* AudioUnitPlayer.m */; };
 		04EA8AC6252045210088AA78 /* 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04EA8AC5252045210088AA78 /* 2.mp3 */; };
+		04EA8ACB2520CCC00088AA78 /* APGPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EA8ACA2520CCC00088AA78 /* APGPlayer.m */; };
 		2F70DCE84CBBDCD02BCD434E /* Pods_ios_audio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEFF8E3A8A28CA8B30E201A /* Pods_ios_audio.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,8 @@
 		0493AFBB251E268B0040C559 /* AudioUnitPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitPlayer.h; sourceTree = "<group>"; };
 		0493AFBC251E268B0040C559 /* AudioUnitPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitPlayer.m; sourceTree = "<group>"; };
 		04EA8AC5252045210088AA78 /* 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 2.mp3; sourceTree = "<group>"; };
+		04EA8AC92520CCBF0088AA78 /* APGPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APGPlayer.h; sourceTree = "<group>"; };
+		04EA8ACA2520CCC00088AA78 /* APGPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APGPlayer.m; sourceTree = "<group>"; };
 		6DEFF8E3A8A28CA8B30E201A /* Pods_ios_audio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_audio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B583B55ECF23605D8F0726E /* Pods-ios-audio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-audio.debug.xcconfig"; path = "Target Support Files/Pods-ios-audio/Pods-ios-audio.debug.xcconfig"; sourceTree = "<group>"; };
 		A887A6FB7F2DF797D284DB7B /* Pods-ios-audio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-audio.release.xcconfig"; path = "Target Support Files/Pods-ios-audio/Pods-ios-audio.release.xcconfig"; sourceTree = "<group>"; };
@@ -66,6 +69,8 @@
 				043FC6162519EBA8008235D7 /* AudioController.m */,
 				0493AFBB251E268B0040C559 /* AudioUnitPlayer.h */,
 				0493AFBC251E268B0040C559 /* AudioUnitPlayer.m */,
+				04EA8AC92520CCBF0088AA78 /* APGPlayer.h */,
+				04EA8ACA2520CCC00088AA78 /* APGPlayer.m */,
 			);
 			path = "AudioUnit-Play";
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 				043FC6172519EBA8008235D7 /* AudioController.m in Sources */,
 				0493AFB6251CDD050040C559 /* AQSAudioPlayer.m in Sources */,
 				0493AFA1251645700040C559 /* AQSPlayViewController.m in Sources */,
+				04EA8ACB2520CCC00088AA78 /* APGPlayer.m in Sources */,
 				0493AF7D25163D5F0040C559 /* ViewController.m in Sources */,
 				0493AFBD251E268B0040C559 /* AudioUnitPlayer.m in Sources */,
 				0493AF7725163D5E0040C559 /* AppDelegate.m in Sources */,

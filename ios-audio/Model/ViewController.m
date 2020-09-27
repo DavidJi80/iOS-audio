@@ -10,6 +10,7 @@
 #import "AudioController.h"
 #import "AQSAudioPlayer.h"
 #import "AudioUnitPlayer.h"
+#import "APGPlayer.h"
 
 @interface ViewController ()
 
@@ -126,7 +127,7 @@
 
 -(void)playByAPG{
     NSString *path = [[NSBundle mainBundle] pathForResource:@"2" ofType:@"mp3"];
-    AudioUnitPlayer *auidoPlayer= [[AudioUnitPlayer alloc]initWithAudio:path];
+    APGPlayer *auidoPlayer= [[APGPlayer alloc]initWithAudio:path];
 }
 
 
