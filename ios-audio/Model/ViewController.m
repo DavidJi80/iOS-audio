@@ -9,12 +9,14 @@
 #import "AQSPlayViewController.h"
 #import "AudioController.h"
 #import "AQSAudioPlayer.h"
+#import "AudioUnitPlayer.h"
 
 @interface ViewController ()
 
 @property (strong, nonatomic) UIButton *aqsPlayBtn;
 @property (strong, nonatomic) UIButton *aqsPlayAudioBtn;
 @property (strong, nonatomic) UIButton *audioUnitPlayBtn;
+@property (strong, nonatomic) UIButton *playByAPGBtn;
 
 @end
 
@@ -46,7 +48,15 @@
         make.top.equalTo(self.aqsPlayAudioBtn.bottom).offset(10);
         make.left.width.height.equalTo(self.aqsPlayBtn);
     }];
+    
+    [self.view addSubview:self.playByAPGBtn];
+    [self.playByAPGBtn makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.audioUnitPlayBtn.bottom).offset(10);
+        make.left.width.height.equalTo(self.aqsPlayBtn);
+    }];
 }
+
+#pragma mark - Lazy
 
 - (UIButton *)aqsPlayBtn{
     if (!_aqsPlayBtn) {
@@ -66,7 +76,7 @@
         [button setBackgroundImage:nil forState:UIControlStateNormal];
         [button setTitle:@"Audio Queue Services - Audio Player" forState:UIControlStateNormal];
         [button addTarget:self action:@selector(aqsPlayAudio) forControlEvents:UIControlEventTouchUpInside];
-        button.backgroundColor=UIColor.brownColor;
+        button.backgroundColor=UIColor.greenColor;
         _aqsPlayAudioBtn = button;
     }
     return _aqsPlayAudioBtn;
@@ -84,13 +94,27 @@
     return _audioUnitPlayBtn;
 }
 
+- (UIButton *)playByAPGBtn{
+    if (!_playByAPGBtn) {
+        UIButton *button = [[UIButton alloc]init];
+        [button setBackgroundImage:nil forState:UIControlStateNormal];
+        [button setTitle:@"Audio Processing Graph - Play Audio" forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(playByAPG) forControlEvents:UIControlEventTouchUpInside];
+        button.backgroundColor=UIColor.brownColor;
+        _playByAPGBtn = button;
+    }
+    return _playByAPGBtn;
+}
+
+#pragma mark - Action
+
 -(void)aqsPlay{
     AQSPlayViewController *vc=[AQSPlayViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)aqsPlayAudio{
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp3"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"2" ofType:@"mp3"];
     
     AQSAudioPlayer *audio= [[AQSAudioPlayer alloc]initWithAudio:path];
 }
@@ -98,6 +122,11 @@
 -(void)audioUnitPlay{
     AudioController *audioController=[AudioController new];
     [audioController start];
+}
+
+-(void)playByAPG{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"2" ofType:@"mp3"];
+    AudioUnitPlayer *auidoPlayer= [[AudioUnitPlayer alloc]initWithAudio:path];
 }
 
 
