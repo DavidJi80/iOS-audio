@@ -96,7 +96,7 @@
 }
 
 -(void)audioUnitPlay{
-    AudioController *audioController=[AudioController new];
+    AudioController *audioController=[AudioController sharedAudioManager];
     [audioController start];
 }
 

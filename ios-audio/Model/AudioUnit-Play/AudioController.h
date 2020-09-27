@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AudioController : NSObject
 
++ (AudioController *)sharedAudioManager;
+
 //开启 Audio Unit
 - (void)start;
 

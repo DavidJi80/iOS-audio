@@ -176,7 +176,29 @@ static OSStatus recordingCallback(void *inRefCon,
                                   UInt32 inBusNumber,
                                   UInt32 inNumberFrames,
                                   AudioBufferList *ioData) {
-    NSLog(@"sss");
+    // TODO:
+    // 使用 inNumberFrames 计算有多少数据是有效的
+    // 在 AudioBufferList 里存放着更多的有效空间
+    
+    AudioController *THIS = (__bridge AudioController*) inRefCon;
+    //bufferList里存放着一堆 buffers, buffers的长度是动态的。
+    THIS->_bufferList.mNumberBuffers = 1;
+    THIS->_bufferList.mBuffers[0].mDataByteSize = sizeof(SInt16)*inNumberFrames;
+    THIS->_bufferList.mBuffers[0].mNumberChannels = 1;
+    THIS->_bufferList.mBuffers[0].mData = (SInt16*) malloc(sizeof(SInt16)*inNumberFrames);
+    
+    // 获得录制的采样数据
+    OSStatus status;
+    status = AudioUnitRender(THIS->_rioUnit,
+                             ioActionFlags,
+                             inTimeStamp,
+                             inBusNumber,
+                             inNumberFrames,
+                             &(THIS->_bufferList));
+    checkStatus(status);
+    
+    // 现在，我们想要的采样数据已经在bufferList中的buffers中了。
+//    DoStuffWithTheRecordedAudio(bufferList);
     return noErr;
 }
 
