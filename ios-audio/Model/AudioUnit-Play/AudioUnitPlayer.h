@@ -15,8 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
     AudioFileID                   mAudioFile;                     // 5. 音频文件对象
 }
 
-@property (nonatomic, assign) double graphSampleRate;
-
 //播放方法定义
 -(id)initWithAudio:(NSString *)path;
 

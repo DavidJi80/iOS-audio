@@ -208,7 +208,7 @@ static OSStatus playbackCallback(void *inRefCon,
                                  UInt32 inBusNumber,
                                  UInt32 inNumberFrames,
                                  AudioBufferList *ioData) {
-    NSLog(@"ddd");
+    
     return noErr;
 }
 

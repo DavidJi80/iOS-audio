@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UIButton *aqsPlayAudioBtn;
 @property (strong, nonatomic) UIButton *audioUnitPlayBtn;
 @property (strong, nonatomic) UIButton *playByAPGBtn;
+@property (strong, nonatomic) UIButton *playByAUBtn;
 
 @end
 
@@ -53,6 +54,12 @@
     [self.view addSubview:self.playByAPGBtn];
     [self.playByAPGBtn makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.audioUnitPlayBtn.bottom).offset(10);
+        make.left.width.height.equalTo(self.aqsPlayBtn);
+    }];
+    
+    [self.view addSubview:self.playByAUBtn];
+    [self.playByAUBtn makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.playByAPGBtn.bottom).offset(10);
         make.left.width.height.equalTo(self.aqsPlayBtn);
     }];
 }
@@ -107,6 +114,18 @@
     return _playByAPGBtn;
 }
 
+- (UIButton *)playByAUBtn{
+    if (!_playByAUBtn) {
+        UIButton *button = [[UIButton alloc]init];
+        [button setBackgroundImage:nil forState:UIControlStateNormal];
+        [button setTitle:@"Audio Unit Demo - Play Audio" forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(playByAU) forControlEvents:UIControlEventTouchUpInside];
+        button.backgroundColor=UIColor.brownColor;
+        _playByAUBtn = button;
+    }
+    return _playByAUBtn;
+}
+
 #pragma mark - Action
 
 -(void)aqsPlay{
@@ -116,7 +135,6 @@
 
 -(void)aqsPlayAudio{
     NSString *path = [[NSBundle mainBundle] pathForResource:@"2" ofType:@"mp3"];
-    
     AQSAudioPlayer *audio= [[AQSAudioPlayer alloc]initWithAudio:path];
 }
 
@@ -128,6 +146,11 @@
 -(void)playByAPG{
     NSString *path = [[NSBundle mainBundle] pathForResource:@"2" ofType:@"mp3"];
     APGPlayer *auidoPlayer= [[APGPlayer alloc]initWithAudio:path];
+}
+
+-(void)playByAU{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"2" ofType:@"mp3"];
+    AudioUnitPlayer *auidoPlayer= [[AudioUnitPlayer alloc]initWithAudio:path];
 }
 
 

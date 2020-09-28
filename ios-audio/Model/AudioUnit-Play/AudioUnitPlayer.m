@@ -43,9 +43,7 @@ static OSStatus renderCallback(void *inRefCon,
                                      0,                         // 5
                                      &mAudioFile                // 6
                                      );
-    if (status != noErr) {//错误处理
-        NSLog(@"*** Error *** PlayAudio - play:Path: could not open audio file. Path given was: %@", path);
-    }
+    checkOSStatus(status);
     CFRelease (audioFileURL);                                   // 7
     //1.3
     UInt32 dataFormatSize = sizeof (mDataFormat);           // 1
@@ -59,64 +57,52 @@ static OSStatus renderCallback(void *inRefCon,
     
     /* Audio Unit Hosting */
     
-    //1. 配置音频会话(AVAudioSession)
-    double graphSampleRate=mDataFormat.mSampleRate;
-    NSError *audioSessionError = nil;
-    AVAudioSession *mySession = [AVAudioSession sharedInstance];                            // 1
-    [mySession setPreferredSampleRate: graphSampleRate error: &audioSessionError];          // 2
-    [mySession setCategory: AVAudioSessionCategoryPlayAndRecord error: &audioSessionError]; // 3
-    [mySession setActive: YES error: &audioSessionError];                                   // 4
-    self.graphSampleRate = mySession.sampleRate;                                            // 5
-    
-    //2. 指定所需的音频单元
-    AudioComponentDescription ioUnitDesc;
-    ioUnitDesc.componentType          = kAudioUnitType_Output;
-    ioUnitDesc.componentSubType       = kAudioUnitSubType_RemoteIO;
-    ioUnitDesc.componentManufacturer  = kAudioUnitManufacturer_Apple;
-    ioUnitDesc.componentFlags         = 0;
-    ioUnitDesc.componentFlagsMask     = 0;
-    
-    //3. 建立音频处理图
-    //3.1.
-    AUGraph processingGraph;
-    NewAUGraph (&processingGraph);
-    //3.2.
-    AUNode ioNode;
-    //3.3.
-    AUGraphAddNode (processingGraph, &ioUnitDesc, &ioNode);
-    //3.4.
-    AUGraphOpen (processingGraph);
-    //3.5.
-    AudioUnit ioUnit;
-    AUGraphNodeInfo (processingGraph, ioNode, NULL, &ioUnit);
+    // 描述音频元件 - RemoteIO
+    AudioComponentDescription aComponentDesc;
+    aComponentDesc.componentType                      = kAudioUnitType_Output;
+    aComponentDesc.componentSubType                   = kAudioUnitSubType_RemoteIO;
+    aComponentDesc.componentManufacturer              = kAudioUnitManufacturer_Apple;
+    aComponentDesc.componentFlags                     = 0;
+    aComponentDesc.componentFlagsMask                 = 0;
+    UInt32 comCount=AudioComponentCount(&aComponentDesc);
+    NSLog(@"共有 %d RemoteIO",comCount);
+    // 获得一个元件
+    AudioComponent inputComponent = AudioComponentFindNext(NULL, &aComponentDesc);
 
-    //4. 配置音频单元
-    status = AudioUnitSetProperty(ioUnit,
-                                  kAudioUnitProperty_StreamFormat,
-                                  kAudioUnitScope_Input,
-                                  0,
-                                  &mDataFormat,
-                                  sizeof(mDataFormat));
+    // 获得 Audio Unit
+    //AudioComponentInstance audioUnit;
+    AudioUnit audioUnit;
+    status = AudioComponentInstanceNew(inputComponent, &audioUnit);
+    checkOSStatus(status);
     
-    AURenderCallbackStruct callbackStruct;
-    callbackStruct.inputProc        = &renderCallback;
-    callbackStruct.inputProcRefCon  = (__bridge void * _Nullable)(self);
-     
-    AUGraphSetNodeInputCallback (processingGraph,
-                                 ioNode,
-                                 0,                 // output element
-                                 &callbackStruct);
-    Boolean graphUpdated;
-    AUGraphUpdate (processingGraph, &graphUpdated);
+    UInt32 enableOutput        = 0;    // to disable output
+    AudioUnitElement outputBus = 0;
+    Boolean outWritable;
+    status = AudioUnitGetPropertyInfo(
+                                  audioUnit,
+                                  kAudioOutputUnitProperty_EnableIO,
+                                  kAudioUnitScope_Output,
+                                  outputBus,
+                                  &enableOutput,
+                                      &outputBus);
+    checkOSStatus(status);
+    if (outWritable){
+        NSLog(@"dd");
+    }
+//    NSLog(@"ElementCount:%d,%d",elementCount,elementCountSize);
     
+//    AudioStreamBasicDescription audioFormat;
+//    status = AudioUnitGetProperty(audioUnit, kAudioUnitProperty_ElementCount, kAudioUnitScope_Global, 0, &elementCount, &elementCountSize);
+//    checkOSStatus(status);
     
-    //8.
-    status = AUGraphInitialize (processingGraph);
-    // Check for error. On successful initialization, start the graph...
-    AUGraphStart (processingGraph);
 
-    
     return self;
+}
+
+// 检测状态
+void checkOSStatus(OSStatus status) {
+    if(status!=0)
+        printf("Error: %d\n", (int)status);
 }
 
 - (void) printASBD: (AudioStreamBasicDescription) asbd {
@@ -135,5 +121,6 @@ static OSStatus renderCallback(void *inRefCon,
     NSLog (@"  Channels per Frame:  %10u",    (unsigned int)asbd.mChannelsPerFrame);
     NSLog (@"  Bits per Channel:    %10u",    (unsigned int)asbd.mBitsPerChannel);
 }
+
 
 @end
