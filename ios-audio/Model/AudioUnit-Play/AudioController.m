@@ -176,6 +176,9 @@ static OSStatus recordingCallback(void *inRefCon,
                                   UInt32 inBusNumber,
                                   UInt32 inNumberFrames,
                                   AudioBufferList *ioData) {
+    NSLog(@"[recording] Bus编号:%d,样本帧数:%d",inBusNumber,inNumberFrames);
+    
+    
     // TODO:
     // 使用 inNumberFrames 计算有多少数据是有效的
     // 在 AudioBufferList 里存放着更多的有效空间
@@ -208,7 +211,7 @@ static OSStatus playbackCallback(void *inRefCon,
                                  UInt32 inBusNumber,
                                  UInt32 inNumberFrames,
                                  AudioBufferList *ioData) {
-    
+    NSLog(@"[play] Bus编号:%d,样本帧数:%d",inBusNumber,inNumberFrames);
     return noErr;
 }
 

@@ -10,13 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AudioUnitPlayer : NSObject{
-    AudioStreamBasicDescription   mDataFormat;                    // 2. 音频流的音频数据格式
-    AudioFileID                   mAudioFile;                     // 5. 音频文件对象
-}
+@interface AudioUnitPlayer : NSObject
 
-//播放方法定义
 -(id)initWithAudio:(NSString *)path;
+
+-(void)start;
 
 
 @end

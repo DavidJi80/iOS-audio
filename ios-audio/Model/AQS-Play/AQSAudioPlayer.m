@@ -20,7 +20,7 @@ static void HandleOutputBuffer (
     if (pAqData->mIsRunning == 0) return;                     // 2
     UInt32 numBytesReadFromFile;                              // 3
     UInt32 numPackets = pAqData->mNumPacketsToRead;           // 4
-    OSStatus status=AudioFileReadPacketData(                            // 1
+    OSStatus status=AudioFileReadPackets(                            // 1
                             pAqData->mAudioFile,        // 2
                             false,                      // 3
                             &numBytesReadFromFile,      // 4
@@ -30,6 +30,7 @@ static void HandleOutputBuffer (
                             inBuffer->mAudioData        // 8
                             );
     if(status!=noErr)return;
+    NSLog(@"%lld,%d",pAqData->mCurrentPacket,numPackets);
     if (numPackets > 0) {                                     // 5
         inBuffer->mAudioDataByteSize = numBytesReadFromFile;  // 6
         AudioQueueEnqueueBuffer (                                           // 1

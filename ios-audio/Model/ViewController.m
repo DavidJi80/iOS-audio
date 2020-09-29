@@ -118,9 +118,9 @@
     if (!_playByAUBtn) {
         UIButton *button = [[UIButton alloc]init];
         [button setBackgroundImage:nil forState:UIControlStateNormal];
-        [button setTitle:@"Audio Unit Demo - Play Audio" forState:UIControlStateNormal];
+        [button setTitle:@"AudioUnit & ExtAudioFile - Audio Player" forState:UIControlStateNormal];
         [button addTarget:self action:@selector(playByAU) forControlEvents:UIControlEventTouchUpInside];
-        button.backgroundColor=UIColor.brownColor;
+        button.backgroundColor=UIColor.greenColor;
         _playByAUBtn = button;
     }
     return _playByAUBtn;
@@ -151,6 +151,7 @@
 -(void)playByAU{
     NSString *path = [[NSBundle mainBundle] pathForResource:@"2" ofType:@"mp3"];
     AudioUnitPlayer *auidoPlayer= [[AudioUnitPlayer alloc]initWithAudio:path];
+    [auidoPlayer start];
 }
 
 
