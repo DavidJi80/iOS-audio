@@ -190,15 +190,15 @@ void printAudioUnitRenderActionFlags(AudioUnitRenderActionFlags ioActionFlags){
     }else if (ioActionFlags==kAudioUnitRenderAction_DoNotCheckRenderArgs){
         NSLog(@"不会对提供给渲染的参数执行检查");
     }else{
-        NSLog(@"%d",ioActionFlags);
+        NSLog(@"%u",(unsigned int)ioActionFlags);
     }
 }
 
 // 打印 AudioTimeStamp
 void printAudioTimeStamp(const AudioTimeStamp *audioTimeStamp){
-    NSLog(@"Flags:%d,主机的时基:%llu，Rate比率:%f，样本帧时间:%f，世界时钟时间:%llu",audioTimeStamp->mFlags,audioTimeStamp->mHostTime,audioTimeStamp->mRateScalar,audioTimeStamp->mSampleTime,audioTimeStamp->mWordClockTime);
+    NSLog(@"Flags:%u,主机的时基:%llu，Rate比率:%f，样本帧时间:%f，世界时钟时间:%llu",(unsigned int)audioTimeStamp->mFlags,audioTimeStamp->mHostTime,audioTimeStamp->mRateScalar,audioTimeStamp->mSampleTime,audioTimeStamp->mWordClockTime);
     SMPTETime mSMPTETime=audioTimeStamp->mSMPTETime;
-    NSLog(@"Type:%d，子帧数:%d [%d:%d:%d:%d]",mSMPTETime.mType,mSMPTETime.mSubframeDivisor,mSMPTETime.mHours,mSMPTETime.mMinutes,mSMPTETime.mSeconds,mSMPTETime.mFrames);
+    NSLog(@"Type:%u，子帧数:%d [%d:%d:%d:%d]",(unsigned int)mSMPTETime.mType,mSMPTETime.mSubframeDivisor,mSMPTETime.mHours,mSMPTETime.mMinutes,mSMPTETime.mSeconds,mSMPTETime.mFrames);
 }
 
 
